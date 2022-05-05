@@ -12,10 +12,10 @@ const VerifyEmail = () => {
         error ? toast.error(error?.message) : toast.success("Email verification sent");
     }
     return (
-        <div class="d-md-flex alert justify-content-around alert-warning alert-dismissible fade show" role="alert">
+        <div className="d-md-flex alert justify-content-around alert-warning alert-dismissible fade show" role="alert">
             <strong>Please verify your email</strong>
-            <button onClick={handleSendEmailVerification} type="button" class="btn btn-primary btn-sm d-block ms-md-auto">Send Email Verification {sending && <ButtonSpinner />}</button>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            <button onClick={handleSendEmailVerification} type="button" className="btn btn-primary btn-sm d-block ms-md-auto">Send Email Verification {sending && <ButtonSpinner />}</button>
+            <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             <ToastContainer
                 position="top-center"
                 autoClose={2000}

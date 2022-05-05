@@ -2,8 +2,8 @@ import React from 'react';
 
 const ButtonSpinner = () => {
     return (
-        <div class="spinner-border spinner-border-sm" role="status">
-            <span class="visually-hidden">Loading...</span>
+        <div className="spinner-border spinner-border-sm mt-2" role="status">
+            <span className="visually-hidden">Loading...</span>
         </div>
     );
 };

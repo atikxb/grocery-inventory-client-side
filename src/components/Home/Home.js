@@ -5,7 +5,7 @@ const Home = () => {
     return (
         <main>
             <div className="hero text-center">
-                <h1>Welcome to Grocery Stock Management System</h1>
+                <h1>Welcome to Grocery Inventory Management System</h1>
             </div>
             <Items/>
         </main>
