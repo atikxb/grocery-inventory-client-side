@@ -1,7 +1,12 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
+import ButtonSpinner from '../Loading/ButtonSpinner';
 
 const Header = () => {
+    const [user, loading] = useAuthState(auth);
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-info shadow">
         <div className="container-fluid">
@@ -11,8 +16,8 @@ const Header = () => {
                 aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-                <ul className="navbar-nav justify-content-center align-items-center mb-2 mb-lg-0">
+            <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul className="navbar-nav justify-content-center mb-2 mb-lg-0">
                     <li className="nav-item">
                         <Link className="nav-link" to="/">Home</Link>
                     </li>
@@ -25,10 +30,11 @@ const Header = () => {
                     <li className="nav-item">
                         <Link className="nav-link" to="/my-items"> My Items</Link>
                     </li>
-                    <li className="nav-item">
-                        <Link className="nav-link" to="/login"> <button className="btn btn-primary">Login</button></Link>
-                    </li>
-
+                    <li className="nav-item ms-md-5">
+                    {
+                            loading ? <ButtonSpinner/> : user ? <><span className='me-2'>Welcome, {user?.displayName}</span><button onClick={() => signOut(auth)} className="btn btn-danger">Logout</button></> : <Link className="mx-md-3" to="/login"><button className="btn btn-warning">Login</button></Link>
+                        }
+                        </li>
                 </ul>
 
             </div>

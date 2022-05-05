@@ -1,10 +1,11 @@
 import React from 'react';
-import ButtonSpinner from './ButtonSpinner';
 
 const Loading = () => {
     return (
-        <div style={{ height: '500px' }} className='d-flex justify-content-center align-items-center'>
-            <ButtonSpinner />
+        <div style={{height: '100vh'}} className='d-flex justify-content-center align-items-center'>
+            <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
         </div>
     );
 };

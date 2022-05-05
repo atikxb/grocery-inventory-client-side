@@ -11,16 +11,17 @@ import Register from './components/Register/Register';
 import MyItems from './components/MyItems/MyItems';
 import Blogs from './components/Blogs/Blogs';
 import NotFound from './components/NotFound/NotFound';
+import RequireAuth from './components/RequireAuth/RequireAuth';
 function App() {
   return (
     <div className="App">
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/inventory/:id' element={<SingleItem />} />
-        <Route path='/manage-inventory' element={<ManageInventory />} />
-        <Route path='/add-item' element={<AddItem />} />
-        <Route path='/my-items' element={<MyItems />} />
+        <Route path='/inventory/:id' element={<RequireAuth><SingleItem /></RequireAuth>} />
+        <Route path='/manage-inventory' element={<RequireAuth><ManageInventory /></RequireAuth>  } />
+        <Route path='/add-item' element={<RequireAuth><AddItem /></RequireAuth>} />
+        <Route path='/my-items' element={<RequireAuth><MyItems /></RequireAuth>} />
         <Route path='/blogs' element={<Blogs />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
