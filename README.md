@@ -1,5 +1,5 @@
 <h1>Groc Stock</h1>
-<p>Features used in this website:</p>
+<p>This website is actually for manage stock of products. admin or users can login and add their items or view them. then can update those items stock or delete them. some key features are listed below: </p>
 <ul>
 <li>Website have homepage, manage inventory, my items, add item, blogs, login, register page</li>
 <li>Items are fetched form database</li>
