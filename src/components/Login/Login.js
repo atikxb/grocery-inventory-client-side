@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -25,9 +26,11 @@ const Login = () => {
     useEffect(() => {//used useEffect to wait till currentUser and avoid browser router error
         currentUser && navigate(from, { replace: true });
     }, [currentUser, from, navigate]);
-    const handleLogin = e => {
+    const handleLogin = async e => {
         e.preventDefault();
-        signInWithEmailAndPassword(email, password);
+        await signInWithEmailAndPassword(email, password);
+        const {data} = await axios.post(`http://localhost:5000/login`, { email });//get user token from api
+        localStorage.setItem('accessToken', data.accessToken);//set token to local storage
     }
     const handleResetPassword = async () => {
         if (email) {

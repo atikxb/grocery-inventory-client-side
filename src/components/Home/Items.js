@@ -4,7 +4,7 @@ import useItems from '../../hooks/useItems';
 import Loading from '../Loading/Loading';
 
 const Items = () => {
-    const [items, itemsLoading] = useItems();
+    const [items, setItems, itemsLoading] = useItems();
     const navigate = useNavigate();
     return (
         <section className="py-5">
