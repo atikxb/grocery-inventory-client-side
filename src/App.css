@@ -1,38 +1,65 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+    text-decoration: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+    font-family: 'Josefin Sans',
+        sans-serif;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.hero {
+    background-image: url('../public/img/banner.jpg');
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 80vh;
 }
 
-.App-link {
-  color: #61dafb;
+.hero::before {
+    content: '';
+    position: absolute;
+    background: #000;
+    left: 0;
+    height: 80vh;
+    width: 100%;
+    opacity: .5;
+    z-index: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.hero h1 {
+    color: #fff;
+    z-index: 999;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 40%;
+
+}
+
+.item {
+    border: 1px solid #000;
+}
+
+.item h4 {
+    padding-top: 20px;
+}
+
+.item:hover {
+    box-shadow: none;
+}
+
+.not-found h1 {
+    font-size: 100px;
+    
+}
+@media only screen and (min-width: 768px) {
+  .section-padding{padding: 110px 0;}
 }
