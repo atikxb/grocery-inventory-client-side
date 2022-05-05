@@ -8,16 +8,16 @@ import Loading from '../Loading/Loading';
 const Inventory = (props) => {
     const { items, setItems, loading } = props;
     const handleDeleteItem = async id => {
-        const confirm = window.confirm('Are you sure to delete?');
-        confirm && console.log(id);
         try {
-            const response = await axios.delete(`http://localhost:5000/inventory/${id}`);
+            const confirm = window.confirm('Are you sure to delete?');
+            if (confirm) {
+                const response = await axios.delete(`http://localhost:5000/inventory/${id}`);
             if (response?.data?.deletedCount) {
                 const remaining = items.filter(item => item._id !== id);
                 setItems(remaining);
                 toast.success("Item deleted");
-                
-            }
+            }               
+            }           
         }
         catch (error) {
             console.log(error);
@@ -52,7 +52,7 @@ const Inventory = (props) => {
                                             <td>{item.quantity}</td>
                                             <td>{item.supplier}</td>
                                             <td>
-                                                <button onClick={()=>handleDeleteItem(`${item._id}`)} className="btn btn-danger">Delete</button>
+                                                <button onClick={() => handleDeleteItem(`${item._id}`)} className="btn btn-danger">Delete</button>
                                             </td>
                                         </tr>)
                                     }
@@ -66,7 +66,7 @@ const Inventory = (props) => {
             </div>
             <Link to='/add-item'><button className="btn btn-success m-auto d-block mb-2 justify-content-end">Add New
                 Item</button></Link>
-                <ToastContainer
+            <ToastContainer
                 position="top-center"
                 autoClose={2000}
                 hideProgressBar={false}
