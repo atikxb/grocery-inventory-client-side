@@ -22,7 +22,7 @@ const MyItems = () => {
     return (
         <main>
             <Breadcrumb title='My Items' />
-            <Inventory items={items} loading={itemsLoading} />
+            <Inventory items={items} loading={itemsLoading} setItems={setItems} />
         </main>
     );
 };

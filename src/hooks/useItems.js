@@ -14,7 +14,7 @@ const useItems = () => {
 
 
     }, []);
-    return [items, itemsLoading];
+    return [items, setItems, itemsLoading];
 };
 
 export default useItems;
