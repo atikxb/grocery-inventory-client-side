@@ -1,13 +1,17 @@
 import axios from 'axios';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import auth from '../../firebase.init';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 
 const AddItem = () => {
+    const [user] = useAuthState(auth);
     const { register, handleSubmit, reset } = useForm();
     const onSubmit = async data => {
+        data.email = user.email;
         try {
             const response = await axios.post('http://localhost:5000/addItem', data);
             response?.data?.insertedId && toast.success("New Item added successfully !");

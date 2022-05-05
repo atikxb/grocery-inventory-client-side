@@ -9,7 +9,7 @@
 a {
     text-decoration: none;
 }
-
+img{max-width: 100%;}
 body {
     font-family: 'Josefin Sans',
         sans-serif;
@@ -61,5 +61,5 @@ body {
     
 }
 @media only screen and (min-width: 768px) {
-  .section-padding{padding: 110px 0;}
+  .section-padding{padding: 130px 0;}
 }
