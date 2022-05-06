@@ -13,7 +13,7 @@ const SingleItem = () => {
     const [quantity, setQuantity] = useState(0);
     const { register, handleSubmit, reset } = useForm();
     useEffect(() => {//get single item
-        axios.get(`http://localhost:5000/inventory/${id}`)
+        axios.get(`https://grocery-inventory-server-side.herokuapp.com/inventory/${id}`)
             .then(response => {
                 setItem(response.data);
                 setItemLoading(false);
@@ -34,7 +34,7 @@ const SingleItem = () => {
     const updateQuantity = async (newQuantity, showSuccess) => {//increase or decrease quantity
         try {
 
-            const response = await axios.put(`http://localhost:5000/inventory/${id}`, { newQuantity });
+            const response = await axios.put(`https://grocery-inventory-server-side.herokuapp.com/inventory/${id}`, { newQuantity });
             if (response?.data?.modifiedCount) {
                 setQuantity(newQuantity);
                 item.quantity = newQuantity;

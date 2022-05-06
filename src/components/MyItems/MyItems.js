@@ -13,7 +13,7 @@ const MyItems = () => {
     const [itemsLoading, setItemsLoading] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {//get current user's items
-        axios.get(`http://localhost:5000/useritems?email=${user?.email}`, {
+        axios.get(`https://grocery-inventory-server-side.herokuapp.com/useritems?email=${user?.email}`, {
             headers: {//sending user token created at login route
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }

@@ -14,7 +14,7 @@ const AddItem = () => {
     const onSubmit = async data => {
         data.email = user.email;
         try {
-            const response = await axios.post('http://localhost:5000/addItem', data);
+            const response = await axios.post('https://grocery-inventory-server-side.herokuapp.com/addItem', data);
             response?.data?.insertedId && toast.success("New Item added successfully !");
         }
         catch (error) {

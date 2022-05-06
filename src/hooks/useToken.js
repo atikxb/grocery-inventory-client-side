@@ -7,7 +7,7 @@ const useToken = user => {
         const getToken = async () => {
             const email = user?.user?.email;
             if (email) {
-                const { data } = await axios.post(`http://localhost:5000/login`, { email });//get user token from api
+                const { data } = await axios.post(`https://grocery-inventory-server-side.herokuapp.com/login`, { email });//get user token from api
                 setToken(data.accessToken);
                 localStorage.setItem('accessToken', data.accessToken);//set token to local storage              
             }

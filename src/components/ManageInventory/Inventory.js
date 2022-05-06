@@ -12,7 +12,7 @@ const Inventory = (props) => {
         try {
             const confirm = window.confirm('Are you sure to delete?');
             if (confirm) {//delete single item
-                const response = await axios.delete(`http://localhost:5000/inventory/${id}`);
+                const response = await axios.delete(`https://grocery-inventory-server-side.herokuapp.com/inventory/${id}`);
                 if (response?.data?.deletedCount) {
                     const remaining = items.filter(item => item._id !== id);
                     setItems(remaining);

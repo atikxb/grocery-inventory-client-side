@@ -17,6 +17,7 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    console.log(user?.user?.displayName);
     const [sendPasswordResetEmail, sending, emailError] = useSendPasswordResetEmail(auth);
     const [token] = useToken(user);
     const [email, setEmail] = useState('');

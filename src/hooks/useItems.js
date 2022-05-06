@@ -5,7 +5,7 @@ const useItems = () => {
     const [items, setItems] = useState([]);
     const [itemsLoading, setItemsLoading] = useState(true);
     useEffect(() => {//get all items
-        axios.get(`http://localhost:5000/items`)
+        axios.get(`https://grocery-inventory-server-side.herokuapp.com/items`)
             .then(response => {
                 setItems(response.data);
                 setItemsLoading(false);
