@@ -19,25 +19,28 @@ const SingleItem = () => {
                 setItemLoading(false);
             })
             .catch(error => console.log(error));
-
-
     }, [id]);
-    // useEffect(() => {
-    //     setQuantity(item.quantity);
-    // }, [item]);
-    //decrease quantity on delivered
-    const handleDecreaseQuantity = async id => {
-        setQuantity(quantity - 1);
-        updateQuantity(id, quantity);
+    const handleDecreaseQuantity = () => {// decrease quantity by 1 when clicked
+        if (item.quantity > 0) {
+            const newQuantity = parseInt(item.quantity) - 1;
+            updateQuantity(newQuantity, false);
+        }
     }
-    const handleIncreaseQuantity = async data => {
-        await setQuantity(parseInt(item.quantity) + parseInt(data.quantity));
-        updateQuantity(id, quantity);
+    const handleIncreaseQuantity = data => {// add new inputted quantity with the previous quantity
+        reset();
+        const newQuantity = parseInt(item.quantity) + parseInt(data.quantity);
+        (typeof (newQuantity) === 'number' && data.quantity > 0) ? updateQuantity(newQuantity, true) : toast.error("Please input a valid positive number");
     }
-    const updateQuantity = async (id, quantity) => {
+    const updateQuantity = async (newQuantity, showSuccess) => {//increase or decrease quantity
         try {
-            const response = await axios.put(`http://localhost:5000/inventory/${id}`, { quantity });
-            response?.data?.modifiedCount && toast.success("quantity updated");
+
+            const response = await axios.put(`http://localhost:5000/inventory/${id}`, { newQuantity });
+            if (response?.data?.modifiedCount) {
+                setQuantity(newQuantity);
+                item.quantity = newQuantity;
+                showSuccess && toast.success("quantity updated");
+
+            }
         }
         catch (error) {
             console.log(error);
@@ -59,8 +62,10 @@ const SingleItem = () => {
                             <p className="badge bg-secondary">Quantity: {item.quantity}</p>
                             <p className="badge bg-secondary ms-2">Supplier Name: {item.supplier}</p>
                             <br />
-                            <button onClick={() => handleDecreaseQuantity(`${item._id}`)} className="btn btn-warning">Delivered</button>
-                            <button className="btn btn-danger ms-2">Sold</button>
+                            {
+                                item.quantity ? <button onClick={() => handleDecreaseQuantity()} className="btn btn-warning">Delivered</button> :
+                                    <button className="btn btn-danger ms-2">Sold</button>
+                            }
                             <form onSubmit={handleSubmit(handleIncreaseQuantity)} className='pt-5'>
                                 <div className="mb-3">
                                     <label htmlFor="restock" className="form-label">Restock the items</label>
