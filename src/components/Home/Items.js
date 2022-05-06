@@ -12,8 +12,8 @@ const Items = () => {
                 <h1 className="text-center pb-3">Grocery Items</h1>
                 {itemsLoading ? <Loading /> : <div className="row">
                     {
-                        items.slice(0,6).map(item => <div key={item._id} className="col-lg-4 mb-2">
-                            <div style={{height: '100%'}} className="item shadow p-3 rounded">
+                        items.slice(0, 6).map(item => <div key={item._id} className="col-lg-4 mb-2">
+                            <div style={{ height: '100%' }} className="item shadow p-3 rounded">
                                 <img src={item.image} alt={item.name} />
                                 <h4>{item.name}</h4>
                                 <p>{item.description}</p>

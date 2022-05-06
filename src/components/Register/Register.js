@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import useToken from '../../hooks/useToken';
 import Breadcrumb from '../Breadcrumb/Breadcrumb';
 import ButtonSpinner from '../Loading/ButtonSpinner';
 import SocialLogin from '../Login/SocialLogin';
 
 const Register = () => {
-    const [currentUser] = useAuthState(auth);
     const [
         createUserWithEmailAndPassword,
         user,
@@ -15,6 +15,7 @@ const Register = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const [updateProfile, updating] = useUpdateProfile(auth);
+    const [token] = useToken(user);
     const [displayName, setDisplayName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -32,8 +33,8 @@ const Register = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
     useEffect(() => {//used useEffect to wait till currentUser and avoid browser router error
-        currentUser && navigate(from, { replace: true });
-    }, [currentUser, from, navigate]);
+        token && navigate(from, { replace: true });
+    }, [token, from, navigate]);
     const handleRegister = async e => {
         e.preventDefault();
         if (password === rePassword) {
@@ -55,26 +56,26 @@ const Register = () => {
 
                                     <div className="mb-3">
                                         <label htmlFor="name" className="form-label">Name</label>
-                                        <input onBlur={(e) => setDisplayName(e.target.value)} type="text" className="form-control" name="name" id="name" required/>
+                                        <input onBlur={(e) => setDisplayName(e.target.value)} type="text" className="form-control" name="name" id="name" required />
                                     </div>
 
                                     <div className="mb-3">
                                         <label htmlFor="email" className="form-label">Email</label>
-                                        <input onBlur={(e) => setEmail(e.target.value)} type="email" className="form-control" name="email" id="email" required/>
+                                        <input onBlur={(e) => setEmail(e.target.value)} type="email" className="form-control" name="email" id="email" required />
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="password" className="form-label">Password</label>
-                                        <input onBlur={(e) => setPassword(e.target.value)} type="password" className="form-control" name="password" id="password" required/>
+                                        <input onBlur={(e) => setPassword(e.target.value)} type="password" className="form-control" name="password" id="password" required />
                                     </div>
                                     <div className="mb-3">
                                         <label htmlFor="repassword" className="form-label">Retype Password</label>
-                                        <input onBlur={handleRePasswordOnBlur} type="password" className="form-control" name="repassword" id="repassword" required/>
+                                        <input onBlur={handleRePasswordOnBlur} type="password" className="form-control" name="repassword" id="repassword" required />
                                         <p className='text-danger'>{passwordError}</p>
                                     </div>
 
 
-                                    <button type="submit" className="btn btn-primary w-100">Register {loading && <ButtonSpinner/>}</button>
-                                    <p className='text-danger mt-2'>{error?.message}</p> 
+                                    <button type="submit" className="btn btn-primary w-100">Register {loading && <ButtonSpinner />}</button>
+                                    <p className='text-danger mt-2'>{error?.message}</p>
                                     <SocialLogin />
                                 </form>
 

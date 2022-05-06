@@ -2,6 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import auth from '../../firebase.init';
@@ -27,7 +28,7 @@ const AddItem = () => {
             <section className="py-5">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-6 offset-3">
+                        <div className="col-lg-6 offset-lg-3">
                             <div className="form shadow p-5">
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="mb-3">
@@ -72,6 +73,8 @@ const AddItem = () => {
                             </div>
                         </div>
                     </div>
+                    <Link to="/manage-inventory"><button className="btn-lg btn-info text-white my-5 m-auto d-block">Manage
+                        Inventories</button></Link>
                 </div>
             </section>
         </main>

@@ -36,8 +36,8 @@ const Header = () => {
                                         </li></>
                                 }
                                 <li className="nav-item">
-                            <Link className="nav-link" to="/blogs">Blogs</Link>
-                        </li>
+                                    <Link className="nav-link" to="/blogs">Blogs</Link>
+                                </li>
                                 <li className="nav-item ms-md-5">
                                     {
                                         user ? <><span className='me-2'>Welcome, {user?.displayName}</span><button onClick={() => signOut(auth)} className="btn btn-danger">Logout</button></> : <Link className="mx-md-3" to="/login"><button className="btn btn-warning">Login</button></Link>

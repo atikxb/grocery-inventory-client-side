@@ -7,8 +7,8 @@ const ManageInventory = () => {
     const [items, setItems, itemsLoading] = useItems();
     return (
         <main>
-            <Breadcrumb title='Manage Inventory'/>
-            <Inventory items={items} loading={itemsLoading} setItems={setItems}/>
+            <Breadcrumb title='Manage Inventory' />
+            <Inventory items={items} loading={itemsLoading} setItems={setItems} />
         </main>
     );
 };

@@ -1,23 +1,24 @@
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Loading from '../Loading/Loading';
 
 const Inventory = (props) => {
     const { items, setItems, loading } = props;
+    const navigate = useNavigate();
     const handleDeleteItem = async id => {
         try {
             const confirm = window.confirm('Are you sure to delete?');
-            if (confirm) {
+            if (confirm) {//delete single item
                 const response = await axios.delete(`http://localhost:5000/inventory/${id}`);
-            if (response?.data?.deletedCount) {
-                const remaining = items.filter(item => item._id !== id);
-                setItems(remaining);
-                toast.success("Item deleted");
-            }               
-            }           
+                if (response?.data?.deletedCount) {
+                    const remaining = items.filter(item => item._id !== id);
+                    setItems(remaining);
+                    toast.success("Item deleted");
+                }
+            }
         }
         catch (error) {
             console.log(error);
@@ -40,6 +41,7 @@ const Inventory = (props) => {
                                         <th scope="col">Quantity</th>
                                         <th scope="col">Supplier name</th>
                                         <th scope="col"></th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,6 +53,9 @@ const Inventory = (props) => {
                                             <td>${item.price}</td>
                                             <td>{item.quantity}</td>
                                             <td>{item.supplier}</td>
+                                            <td>
+                                                <button onClick={() => navigate(`/inventory/${item._id}`)} className="btn btn-primary">Update</button>
+                                            </td>
                                             <td>
                                                 <button onClick={() => handleDeleteItem(`${item._id}`)} className="btn btn-danger">Delete</button>
                                             </td>
